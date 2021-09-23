@@ -1,0 +1,20 @@
+{
+  "name": "vuepress-blogs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs --temp .temp",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.8.2",
+    "watchpack": "^1.7.5"
+  },
+  "dependencies": {
+    "vuepress-theme-ktquez": "^0.2.18"
+  }
+}

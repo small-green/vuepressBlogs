@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>浏览器是如何解析JS的？？？ | 小蜗牛慢慢爬</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/images/logo.png">
+    <meta name="description" content="只要从现在开始行动，就不算是在原地踏步">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.732ada5e.js" as="script"><link rel="preload" href="/assets/js/2.4e72d9fa.js" as="script"><link rel="preload" href="/assets/js/11.7fbad23a.js" as="script"><link rel="prefetch" href="/assets/js/10.5e2a32c5.js"><link rel="prefetch" href="/assets/js/12.95ab1899.js"><link rel="prefetch" href="/assets/js/13.22845f94.js"><link rel="prefetch" href="/assets/js/14.9f7e113a.js"><link rel="prefetch" href="/assets/js/3.b8d59c98.js"><link rel="prefetch" href="/assets/js/4.1ec4d5f4.js"><link rel="prefetch" href="/assets/js/5.657d4fd9.js"><link rel="prefetch" href="/assets/js/6.3d277fb6.js"><link rel="prefetch" href="/assets/js/7.6c79748d.js"><link rel="prefetch" href="/assets/js/8.73eb976d.js"><link rel="prefetch" href="/assets/js/9.05bdf3af.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/logo.png" alt="小蜗牛慢慢爬" class="logo"> <span class="site-name can-hide">小蜗牛慢慢爬</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/leading/network/web工作原理.html" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/life/six/618.html" class="nav-link">
+  生活
+</a></div><div class="nav-item"><a href="/share/" class="nav-link">
+  分享
+</a></div><div class="nav-item"><a href="/mime/" class="nav-link">
+  关于我
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/leading/network/web工作原理.html" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/life/six/618.html" class="nav-link">
+  生活
+</a></div><div class="nav-item"><a href="/share/" class="nav-link">
+  分享
+</a></div><div class="nav-item"><a href="/mime/" class="nav-link">
+  关于我
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>网络层</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/leading/network/web工作原理.html" class="sidebar-link">web工作原理</a></li><li><a href="/leading/network/Browser解析文件.html" class="active sidebar-link">Browser解析js</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/leading/network/cross-domain.html" class="sidebar-link">跨域</a></li><li><a href="/leading/network/cross-domain.html" class="sidebar-link">跨域</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>CSS</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JavaScript</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="浏览器是如何解析js的"><a href="#浏览器是如何解析js的" class="header-anchor">#</a> 浏览器是如何解析JS的？？？</h1> <blockquote><p>依稀还记得真正学习到html、css、js、jQuery等知识，还是在大三的第一个学期<br>
+大学前两年真的是玩着玩着，时间就过去了<br>
+当时罗老师对我们真的是进行地狱式训练，连续几周不间断地进行实训，不得不说那时候真的蛮快乐的<br>
+那个时候我学习的后端语言还是PHP（是世界上最好的语言），采用的是xampp+phpmyadmin<br>
+那时候隐约记得老师和我们说过，浏览器是不能直接脚本语言的，所以现在想写一篇笔记记录下来</p></blockquote> <h3 id="浏览器的主要组成部分"><a href="#浏览器的主要组成部分" class="header-anchor">#</a> 浏览器的主要组成部分</h3> <hr> <br> <ul><li><b>用户界面：</b>包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。</li> <li><b>呈现引擎：</b>负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。</li> <li><b>浏览器引擎：</b>在用户界面和呈现引擎之间传送指令。</li> <li><b>网络：</b>用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。</li> <li><b>用户界面后端 ：</b>用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。</li> <li><b>JavaScript 解释器：</b>用于解析和执行 JavaScript 代码。</li> <li><b>数据存储：</b>这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。</li></ul> <p style="color:red;text-indent:2em;">从浏览器的组成来看，我们可以知道如果browser是不能直接解析js代码的，是要通过js解释器去解析和执行的</p> <h3 id="常见于node和cheome中的v8引擎"><a href="#常见于node和cheome中的v8引擎" class="header-anchor">#</a> 常见于NODE和CHEOME中的V8引擎</h3> <img src="http://1.117.206.33:4488/markdown/v8.png" width="80%"> <center>V8组成图</center> <hr> <h4 id="js引擎执行过程"><a href="#js引擎执行过程" class="header-anchor">#</a> js引擎执行过程</h4> <blockquote><p>js引擎的执行过程，主要分为三个阶段:</p> <ul><li><b>语法分析</b></li> <li><b>预编译阶段</b></li> <li><b>执行阶段</b></li></ul></blockquote> <p>下面分析这三个阶段</p> <h3>语法分析</h3> <blockquote><p>分析该js脚本代码块的语法是否正确，如果出现不正确，则向外抛出一个语法错误（SyntaxError），停止该js代码块的执行，然后继续查找并加载下一个代码块；如果语法正确，则进入预编译阶段</p></blockquote> <h3>预编译阶段</h3> <blockquote><p>js代码块通过语法分析阶段之后，语法都正确的下回进入预编译阶段。<br>
+在分析预编译阶段之前，我们先来了解一下js的运行环境，运行环境主要由三种：</p></blockquote> <ul><li><b>全局环境</b>---js代码加载完毕后，进入到预编译也就是进入到全局环境</li> <li><b>函数环境</b>---函数调用的时候，进入到该函数环境，不同的函数，函数环境不同</li> <li><b>eval环境</b>---不建议使用，存在安全、性能问题</li></ul> <h4>参考文档</h4> <p><a href="https://www.jianshu.com/p/4ed19f40de0a" target="_blank" rel="noopener noreferrer">https://www.jianshu.com/p/4ed19f40de0a<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/leading/network/web工作原理.html" class="prev">
+        web工作原理
+      </a></span> <span class="next"><a href="/leading/network/cross-domain.html">
+        跨域
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.732ada5e.js" defer></script><script src="/assets/js/2.4e72d9fa.js" defer></script><script src="/assets/js/11.7fbad23a.js" defer></script>
+  </body>
+</html>
